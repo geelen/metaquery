@@ -38,22 +38,6 @@
     }
   },
 
-  debounce = function( func, wait ) {
-    var args,
-        thisArg,
-        timeoutId;
-
-    function delayed() {
-      timeoutId = null;
-      func.apply( thisArg, args );
-    }
-
-    return function() {
-      window.clearTimeout( timeoutId );
-      timeoutId = window.setTimeout( delayed, wait );
-    };
-  },
-
   hasClass = function( element, className ) {
     return element.className.split(' ').indexOf( className ) !== -1;
   },
@@ -157,9 +141,7 @@
   onDomReady = function () {
     collectMediaQueries();
 
-    addEvent( window, 'resize', debounce( function () {
-      mqChange();
-    }, 50 ));
+    addEvent( window, 'resize', mqChange);
 
     mqChange();
   };
